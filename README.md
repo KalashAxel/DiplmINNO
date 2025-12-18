@@ -1,1 +1,1 @@
-# DiplmINNO
+# DiplomINNO
