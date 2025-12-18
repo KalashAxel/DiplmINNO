@@ -21,10 +21,6 @@ CREATE TABLE raw.credit (
     NumberOfTime60_89DaysPastDueNotWorse INT,
     NumberOfDependents DOUBLE PRECISION
 );
-
--- Загрузка (пример):
--- COPY raw.credit FROM '/path/to/cs-training.csv' WITH (FORMAT csv, HEADER true);
-
 -- =========================
 -- 2) CLEANED (очистка + split)
 -- =========================
