@@ -1,6 +1,0 @@
-
--- schema.sql
-CREATE SCHEMA IF NOT EXISTS raw;
-CREATE SCHEMA IF NOT EXISTS cleaned;
-CREATE SCHEMA IF NOT EXISTS features;
-
