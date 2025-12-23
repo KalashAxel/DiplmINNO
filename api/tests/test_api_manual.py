@@ -11,7 +11,7 @@ BASE_URL = "http://localhost:8000"
 def test_api():
     """Ручное тестирование API"""
     
-    print("🚀 Тестирование Customer Churn Prediction API\n")
+    print("🚀 Тестирование Cred Default Prediction API\n")
     
     # 1. Проверка здоровья
     print("1. Проверка здоровья API:")
@@ -64,8 +64,8 @@ def test_api():
     if response.status_code == 200:
         prediction = response.json()
         print(f"   ✅ Клиент ID: {prediction['customer_id']}")
-        print(f"   ✅ Вероятность оттока: {prediction['churn_probability']:.2%}")
-        print(f"   ✅ Предсказание: {'ОТТОК' if prediction['prediction'] else 'НЕТ ОТТОКА'}")
+        print(f"   ✅ Вероятность default: {prediction['churn_probability']:.2%}")
+        print(f"   ✅ Предсказание: {'default' if prediction['prediction'] else 'НЕТ default'}")
         print(f"   ✅ Порог: {prediction['threshold']}")
     else:
         print(f"   ❌ Ошибка: {response.status_code}")
@@ -83,7 +83,7 @@ def test_api():
     if response.status_code == 200:
         batch_result = response.json()
         print(f"   ✅ Клиентов обработано: {batch_result['total_customers']}")
-        print(f"   ✅ Процент оттока: {batch_result['churn_rate']:.2%}")
+        print(f"   ✅ Процент default: {batch_result['churn_rate']:.2%}")
         print(f"   ✅ Средняя вероятность: {batch_result['avg_probability']:.2%}")
     else:
         print(f"   ❌ Ошибка: {response.status_code}")
