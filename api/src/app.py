@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 
 # Создание FastAPI приложения
 app = FastAPI(
-    title="Предсказание оттока клиентов API",
-    description="REST API для предсказания оттока клиентов с использованием машинного обучения",
+    title="Предсказание default API",
+    description="REST API для предсказания default клиентов с использованием машинного обучения",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
@@ -45,7 +45,7 @@ app.add_middleware(
 async def root():
     """Корневой эндпоинт"""
     return {
-        "message": "Предсказание оттока клиентов API",
+        "message": "Предсказание default клиентов API",
         "version": "1.0.0",
         "docs": "/docs",
         "health": "/health",
@@ -88,7 +88,7 @@ async def predict(
     threshold: float = 0.5,
     predictor: ChurnPredictor = Depends(get_predictor)
 ):
-    """Предсказание оттока для одного клиента"""
+    """Предсказание default для одного клиента"""
     if not predictor.is_loaded:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -131,7 +131,7 @@ async def predict_batch(
     threshold: float = 0.5,
     predictor: ChurnPredictor = Depends(get_predictor)
 ):
-    """Пакетное предсказание оттока для нескольких клиентов"""
+    """Пакетное предсказание default для нескольких клиентов"""
     if not predictor.is_loaded:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
