@@ -42,7 +42,7 @@ class ChurnPredictor:
             logger.info(f"✅ Загружено признаков: {len(self.feature_names)}")
             
             self.model_info = {
-                "model_name": "Предиктор оттоков клиентов",
+                "model_name": "Предиктор default клиентов",
                 "model_type": type(self.model).__name__,
                 "performance": {},
                 "training_date": "unknown",
