@@ -11,17 +11,7 @@ class CustomerFeatures(BaseModel):
     SatisfactionScore: float = Field(..., description="Удовлетворенность (1-5)")
     NumberOfAddress: float = Field(..., description="Количество адресов")
     Complain: float = Field(..., description="Жалобы (0-1)")
-    OrderAmountHikeFromlastYear: float = Field(..., description="Рост заказов (%)")
-    CouponUsed: float = Field(..., description="Использовано купонов")
-    OrderCount: float = Field(..., description="Количество заказов")
-    DaySinceLastOrder: float = Field(..., description="Дней с последнего заказа")
-    CashbackAmount: float = Field(..., description="Сумма кэшбэка")
     
-    # Опциональные признаки, которые могут быть вычислены
-    AvgOrdersPerMonth: Optional[float] = Field(None, description="Средние заказы в месяц")
-    AvgCashbackPerOrder: Optional[float] = Field(None, description="Средний кэшбэк за заказ")
-    EngagementScore: Optional[float] = Field(None, description="Оценка вовлеченности")
-    SatisfactionComplainRatio: Optional[float] = Field(None, description="Отношение удовлетворенности к жалобам")
     
     @field_validator('SatisfactionScore')
     @classmethod
@@ -48,23 +38,14 @@ class CustomerFeatures(BaseModel):
                 "SatisfactionScore": 4.0,
                 "NumberOfAddress": 5.0,
                 "Complain": 0.0,
-                "OrderAmountHikeFromlastYear": 15.0,
-                "CouponUsed": 4.0,
-                "OrderCount": 25.0,
-                "DaySinceLastOrder": 3.0,
-                "CashbackAmount": 250.0,
-                "AvgOrdersPerMonth": 2.08,
-                "AvgCashbackPerOrder": 10.0,
-                "EngagementScore": 87.5,
-                "SatisfactionComplainRatio": 4.0
             }
         }
 
 class ChurnPrediction(BaseModel):
     """Модель для результата предсказания"""
     customer_id: Optional[int] = Field(None, description="ID клиента")
-    churn_probability: float = Field(..., ge=0, le=1, description="Вероятность оттока")
-    prediction: bool = Field(..., description="Предсказание оттока")
+    churn_probability: float = Field(..., ge=0, le=1, description="Вероятность default")
+    prediction: bool = Field(..., description="Предсказание default")
     threshold: float = Field(..., description="Порог классификации")
     model_version: str = Field(..., description="Версия модели")
     timestamp: str = Field(..., description="Время предсказания")
@@ -78,8 +59,8 @@ class BatchPredictionResponse(BaseModel):
     """Модель для batch ответа"""
     predictions: List[ChurnPrediction] = Field(..., description="Список предсказаний")
     total_customers: int = Field(..., description="Общее количество клиентов")
-    churn_rate: float = Field(..., description="Процент оттока в батче")
-    avg_probability: float = Field(..., description="Средняя вероятность оттока")
+    churn_rate: float = Field(..., description="Процент default в батче")
+    avg_probability: float = Field(..., description="Средняя вероятность default")
 
 class ModelInfo(BaseModel):
     """Информация о модели"""
